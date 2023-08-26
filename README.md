@@ -9,7 +9,6 @@ URL Shortener is a Flask-based web application that allows users to shorten long
 - **Instant URL Shortening**: Convert long URLs into short, manageable URLs instantly.
 - **Secure and Reliable**: Built with security and reliability in mind.
 - **Expiration Time**: Set an expiration time for the short URLs.
-- **Easy to Share**: Short URLs are easy to share on social media, emails, and text messages.
 
 ## Installation
 
@@ -31,6 +30,10 @@ URL Shortener is a Flask-based web application that allows users to shorten long
 4. Run the Flask application:
     ```bash
     flask run
+    ```
+    or
+    ```bash
+    py app.py
     ```
 
 ## Usage

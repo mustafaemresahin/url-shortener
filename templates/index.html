@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>URL Shortener</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </head>
+<body></body>
+
+<div class="modal-container">
+    <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Info
+  </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">About URL Shortener</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Welcome to the URL Shortener! This is a simple yet powerful tool designed to make long URLs more manageable. You can use this service to create short URLs that can be easily shared, tweeted, or emailed to friends.</p>
+        <h2>How Does It Work?</h2>
+        <p>When you enter a URL, our service generates a shorter version of it. This shorter URL redirects to the original URL when accessed. This makes it easier to share long URLs in a more user-friendly way.</p>
+        <h2>Features</h2>
+        <ul>
+            <li>Instant URL Shortening</li>
+            <li>Secure and Reliable</li>
+            <li>Expiration Time for URLs</li>
+            <li>Easy to Share</li>
+        </ul>
+        <h2>How to Use</h2>
+        <ol>
+            <li>Go to the homepage.</li>
+            <li>Enter your long URL in the input field.</li>
+            <li>Click the "Shorten URL" button.</li>
+            <li>Your short URL will be generated and displayed.</li>
+            <li>Click the short URL to copy it or open it in a new tab.</li>
+        </ol>            
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+</div>
+</div>
+<h1>URL Shortener</h1>
+<form method='post'>
+    <input type='text' name='url' placeholder='Enter your URL...' required>
+    <input type='datetime-local' name='expiration_time' placeholder='Expiration Time'>
+    <input type='submit' value='Shorten URL'>
+</form>
+<br>
+{% if short %}
+<p class="url-container">Shortened URL: {{ original }} => <a href='{{ short }}' target='_blank' onclick="refresh()">{{ short }}</a></p>
+{% endif %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
+
+<h2>All Shortened URLs</h2>
+<ul class="all-links">
+    {% for original, data in url_list.items() %}
+    <li class="links">{{ original }} => <a href="{{ data['short_url'] }}" target='_blank'>{{ data['short_url'] }}</a> | Clicks: {{ data['click_count'] }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>

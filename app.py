@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-# Dictionary to store our short_urls. In a real-world project, you'd use a database.
+# Dictionary to store short_urls
 url_list = {}
 
 def generate_short_url():

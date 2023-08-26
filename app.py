@@ -5,7 +5,7 @@ import random
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+app.secret_key = 'l&Z1ly3aa!'
 
 # Dictionary to store short_urls
 url_list = {}

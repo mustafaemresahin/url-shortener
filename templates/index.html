@@ -10,7 +10,7 @@
 
 <div class="modal-container">
     <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
     Info
   </button>
 </div>
@@ -59,30 +59,40 @@
 </div>
 </div>
 <h1>URL Shortener</h1>
-<form method='post'>
+<form method='post' class="url-form">
     <input type='text' name='url' placeholder='Enter your URL...' required>
     <input type='datetime-local' name='expiration_time' placeholder='Expiration Time'>
-    <input type='submit' value='Shorten URL'>
+    <button class="btn btn-primary" type="submit">Shorten URL</button>
 </form>
-<br>
-{% if short %}
-<p class="url-container">Shortened URL: {{ original }} => <a href='{{ short }}' target='_blank' onclick="refresh()">{{ short }}</a></p>
-{% endif %}
+<hr>
 
 {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <li>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        </li>
         {% endfor %}
     </ul>
     {% endif %}
 {% endwith %}
-
-<h2>All Shortened URLs</h2>
+<h3>All Shortened URLs</h3>
 <ul class="all-links">
-    {% for original, data in url_list.items() %}
-    <li class="links">{{ original }} => <a href="{{ data['short_url'] }}" target='_blank'>{{ data['short_url'] }}</a> | Clicks: {{ data['click_count'] }}</li>
+    {% for original, data in url_list.items()|reverse %}
+    <li class="links">
+        <h5>{{ original }} => <a href="{{ data['short_url'] }}" target='_blank'>{{ data['short_url'] }}</a> 
+            | Visits: {{ data['click_count'] }} </h5>
+        <div class="button-container">
+            <button type="button" class="btn btn-secondary copyButton" data-url="{{ data['short_url'] }}">Copy</button>
+            <button type="button" class="btn btn-success visitButton" data-url="{{ data['short_url'] }}">Visit</button>
+        </div>
+    </li>
     {% endfor %}
 </ul>
 

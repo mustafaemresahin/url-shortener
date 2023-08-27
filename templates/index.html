@@ -95,7 +95,7 @@
                 <h5>{{ original }} => <a href="{{ data['short_url'] }}" target='_blank'>{{ data['short_url'] }}</a>  </h5>
                 <div class="button-container">
                     <button type="button" class="btn btn-light" >Visits: {{ data['click_count'] }}</button>
-                    <button type="button" class="btn btn-secondary copyButton" data-url="{{ data['short_url'] }}">Copy</button>
+                    <button type="button" class="btn btn-secondary copyButton" data-url="{{ data['short_url'] }}">Copy<i class="fa-solid fa-copy"></i></button>
                     <a href="{{ data['short_url'] }}" target="_blank" class="btn btn-success visitButton">Visit</a>
                     <button type="button" class="btn btn-danger" onclick="deleteUrl(event, '{{ data['short_url'] }}')">Delete</button>
                     <button type="button" class="btn btn-info shareButton" onclick="nativeShare('{{ data['short_url'] }}')">Share</button>
@@ -104,7 +104,7 @@
         </div>
         {% endfor %}
     {% else %}
-    <h5 class="badge badge-secondary">No  Shortened URLs</h5>
+    <h5 class="badge badge-secondary" style="font-size: 14px; padding: 5px 5px;">No  Shortened URLs</h5>
     {% endif %}
 </ul>
 </body>

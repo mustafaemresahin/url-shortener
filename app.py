@@ -29,9 +29,20 @@ def index():
     if request.method == 'POST':
         original_url = request.form['url']
         expiration_time = request.form.get('expiration_time', None)
+        current_time = datetime.now()
 
         if not is_valid_url(original_url):
             flash('Invalid URL format! Please enter a URL like https://mustafaemresahin.com')
+            return render_template('index.html', url_list=url_list)
+        
+        if original_url in url_list:
+            existing_expiration_time = url_list[original_url].get('expiration_time')
+            if existing_expiration_time:
+                dt_object = datetime.strptime(existing_expiration_time, '%Y-%m-%dT%H:%M')
+                if current_time > dt_object:
+                    flash('This URL has already been shortened but has expired.')
+                    return render_template('index.html', url_list=url_list)
+            flash('This URL has already been shortened.')
             return render_template('index.html', url_list=url_list)
 
         if original_url in url_list:
@@ -47,6 +58,8 @@ def index():
                 dt_object = datetime.strptime(data['expiration_time'], '%Y-%m-%dT%H:%M')
                 data['formatted_expiration_time'] = dt_object.strftime('%B %d, %Y, %H:%M %p')
                 data['is_expired'] = current_time > dt_object
+        
+        return redirect(url_for('index'))
 
     return render_template('index.html', url_list=url_list)
 

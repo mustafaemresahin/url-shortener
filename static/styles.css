@@ -1,56 +1,122 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f2f2f2;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 }
-h1 {
+
+h1, h3 {
     color: #333;
+    text-align: center;
+    padding: 10px;
 }
-form {
-    background-color: #fff;
+
+/* Modal Container */
+.modal-container {
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+/* Form Styles */
+.url-form {
+    background: #fff;
+    text-align: center;
+    margin: 30px auto;
+    width: 50%;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-input[type="text"] {
-    width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-}
+
+input[type="text"],
+input[type="datetime-local"],
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    border: none;
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    width: 80%;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus {
+    border-color: #007bff;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
+
+
+/* Shortened URL Display */
 .url-container {
-    background-color: #fff;
-    padding: 15px;
+    background: #fff;
+    text-align: left; 
+    padding: 20px;
+    margin-top: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
 }
-.messages {
-    background-color: #ff6666;
-    color: white;
-    padding: 10px;
-    border-radius: 4px;
+
+/* All Shortened URLs List */
+.all-links {
+    text-align: center;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    width: 60%;
 }
+
 .links {
-    background-color: #b0b0b0;
-    color: rgb(0, 0, 0);
-    margin: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    list-style-type: none;
+    background: #fff;
+    text-align: left;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 80%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
 }
-.modal-container{
+
+/* Buttons */
+.btn {
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-container {
     text-align: right;
+    display: flex;
+    gap: 10px;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }

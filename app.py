@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from urllib.parse import urlparse
 import string
 import random
@@ -39,6 +39,15 @@ def index():
         else:
             short_url = generate_short_url()
             url_list[original_url] = {'short_url': short_url, 'expiration_time': expiration_time, 'click_count': 0}
+
+        current_time = datetime.now()
+
+        for original, data in url_list.items():
+            if data['expiration_time']:
+                dt_object = datetime.strptime(data['expiration_time'], '%Y-%m-%dT%H:%M')
+                data['formatted_expiration_time'] = dt_object.strftime('%B %d, %Y, %H:%M %p')
+                data['is_expired'] = current_time > dt_object
+
     return render_template('index.html', url_list=url_list)
 
 @app.route('/<short_url>')
@@ -52,6 +61,20 @@ def redirect_to_original(short_url):
             return redirect(original)
     flash('URL not found!')
     return redirect(url_for('index'))
+
+@app.route('/delete_url', methods=['POST'])
+def delete_url():
+    data = request.json
+    short_url_to_delete = data.get('url')
+    
+    for original, data in list(url_list.items()): 
+        if data['short_url'] == short_url_to_delete:
+            del url_list[original]
+            return jsonify({'success': True}), 200
+
+    return jsonify({'success': False, 'message': 'URL not found'}), 404
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

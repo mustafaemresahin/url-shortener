@@ -25,7 +25,7 @@ This is a simple yet powerful URL shortener built using Flask. The application a
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/url-shortener.git
+    git clone https://github.com/mustafaemresahin/url-shortener.git
     ```
 
 2. Navigate to the project directory:

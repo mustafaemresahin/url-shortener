@@ -6,10 +6,15 @@ body {
     padding: 0;
 }
 
-h1, h3 {
+h1, h3{
     color: #333;
     text-align: center;
     padding: 10px;
+}
+
+.modal-headers {
+    color: #333;
+    text-align: left;
 }
 
 /* Modal Container */
@@ -91,8 +96,7 @@ input[type="submit"]:hover {
     margin: 10px 0;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: 80%; 
-    display: flex; 
+    width: 100%; 
     justify-content: space-between; 
     align-items: center; 
 }
@@ -106,9 +110,12 @@ input[type="submit"]:hover {
 }
 
 .button-container {
-    text-align: right;
+    text-align: center;
     display: flex;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .messages {

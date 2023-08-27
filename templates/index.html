@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <script src="{{ url_for('static', filename='script.js') }}"></script>
     </head>
-<body></body>
+<body>
 
 <div class="modal-container">
     <!-- Button trigger modal -->
@@ -30,20 +30,21 @@
             make long URLs more manageable. You 
             can use this service to create short
             URLs.</p>
-        <h2>How Does It Work?</h2>
+        <h3 class="modal-headers">How Does It Work?</h3>
         <p>When you enter a URL, our service 
         generates a shorter version of it.
         This shorter URL redirects to the
         original URL when accessed. This
         makes it easier to share long
         URLs in a more user-friendly way.</p>
-        <h2>Features</h2>
+        <h3 class="modal-headers">Features</h3>
         <ul>
             <li>Instant URL Shortening</li>
             <li>Secure and Reliable</li>
             <li>Expiration Time for URLs</li>
+            <li>Easy to Share</li>
         </ul>
-        <h2>How to Use</h2>
+        <h3 class="modal-headers">How to Use</h3>
         <ol>
             <li>Go to the homepage.</li>
             <li>Enter your long URL in the input field.</li>
@@ -62,7 +63,7 @@
 <form method='post' class="url-form">
     <input type='text' name='url' placeholder='Enter your URL...' required>
     <input type='datetime-local' name='expiration_time' placeholder='Expiration Time'>
-    <button class="btn btn-primary" type="submit">Shorten URL</button>
+    <button style="width: 80%;" class="btn btn-primary" type="submit">Shorten URL</button>
 </form>
 <hr>
 
@@ -84,16 +85,27 @@
 {% endwith %}
 <h3>All Shortened URLs</h3>
 <ul class="all-links">
-    {% for original, data in url_list.items()|reverse %}
-    <li class="links">
-        <h5>{{ original }} => <a href="{{ data['short_url'] }}" target='_blank'>{{ data['short_url'] }}</a> 
-            | Visits: {{ data['click_count'] }} </h5>
-        <div class="button-container">
-            <button type="button" class="btn btn-secondary copyButton" data-url="{{ data['short_url'] }}">Copy</button>
-            <button type="button" class="btn btn-success visitButton" data-url="{{ data['short_url'] }}">Visit</button>
+    {% if url_list|length > 0 %}
+        {% for original, data in url_list.items()|reverse %}
+        <div>
+            <li class="links">
+                {% if data['expiration_time'] %}
+                    <span class="badge {% if data['is_expired'] %} badge-danger {% else %} badge-warning {% endif %}">{% if data['is_expired'] %} Expired {% else %} Expires {% endif %} on: {{ data['formatted_expiration_time'] }}</span>
+                {% endif %}
+                <h5>{{ original }} => <a href="{{ data['short_url'] }}" target='_blank'>{{ data['short_url'] }}</a>  </h5>
+                <div class="button-container">
+                    <button type="button" class="btn btn-light" >Visits: {{ data['click_count'] }}</button>
+                    <button type="button" class="btn btn-secondary copyButton" data-url="{{ data['short_url'] }}">Copy</button>
+                    <a href="{{ data['short_url'] }}" target="_blank" class="btn btn-success visitButton">Visit</a>
+                    <button type="button" class="btn btn-danger" onclick="deleteUrl(event, '{{ data['short_url'] }}')">Delete</button>
+                    <button type="button" class="btn btn-info shareButton" onclick="nativeShare('{{ data['short_url'] }}')">Share</button>
+                </div>
+            </li>
         </div>
-    </li>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+    <h5>No  Shortened URLs</h5>
+    {% endif %}
 </ul>
 
 </body>

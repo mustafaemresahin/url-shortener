@@ -39,8 +39,7 @@ def index():
         else:
             short_url = generate_short_url()
             url_list[original_url] = {'short_url': short_url, 'expiration_time': expiration_time, 'click_count': 0}
-
-    return render_template('index.html', short=short_url, original=original_url, url_list=url_list)
+    return render_template('index.html', url_list=url_list)
 
 @app.route('/<short_url>')
 def redirect_to_original(short_url):

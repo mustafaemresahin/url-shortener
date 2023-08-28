@@ -8,9 +8,7 @@
     </head>
 <body>
 <div class="modal-container">
-  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
-    Info
-  </button>
+  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Info</button>
 </div>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -52,10 +50,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-</div>
-</div>
+    </div></div></div></div>
 <h1>URL Shortener</h1>
 <form method='post' class="url-form">
     <input type='text' name='url' placeholder='Enter your URL...' required>
@@ -66,25 +61,20 @@
 {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class="messages">
-        {% for message in messages %}
-        <li>
+        {% for message in messages %}<li>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{message}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+            </button></div></li>
+        {% endfor %}</ul>
     {% endif %}
 {% endwith %}
 <h3>All Shortened URLs</h3>
 <ul class="all-links">
     {% if url_list|length > 0 %}
         {% for original, data in url_list.items()|reverse %}
-        <div>
-            <li class="links">
+        <div><li class="links">
                 {% if data['expiration_time'] %}
                     <span class="badge {% if data['is_expired'] %} badge-danger {% else %} badge-warning {% endif %}">{% if data['is_expired'] %} Expired {% else %} Expires {% endif %} on: {{ data['formatted_expiration_time'] }}</span>
                 {% endif %}
@@ -94,10 +84,7 @@
                     <button type="button" class="btn btn-secondary copyButton" data-url="{{ data['short_url'] }}">Copy<i class="fa-solid fa-copy"></i></button>
                     <a href="{{ data['short_url'] }}" target="_blank" class="btn btn-success visitButton">Visit</a>
                     <button type="button" class="btn btn-danger" onclick="deleteUrl(event, '{{ data['short_url'] }}')">Delete</button>
-                    <button type="button" class="btn btn-info shareButton" onclick="nativeShare('{{ data['short_url'] }}')">Share</button>
-                </div>
-            </li>
-        </div>
+                    <button type="button" class="btn btn-info shareButton" onclick="nativeShare('{{ data['short_url'] }}')">Share</button></div></li></div>
         {% endfor %}
     {% else %}
     <h5 class="badge badge-secondary" style="font-size: 14px; padding: 5px 5px;">No  Shortened URLs</h5>

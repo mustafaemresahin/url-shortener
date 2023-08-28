@@ -96,7 +96,7 @@ def redirect_to_original(short_url):
             # Check if the URL has expired
             if data.get('expiration_time') and datetime.now() > datetime.strptime(data['expiration_time'], '%Y-%m-%dT%H:%M'):
                 flash('URL has expired!')
-                return redirect(url_for('index'))
+                return render_template('index.html', url_list=url_list)
             # Increment the click count for the URL
             data['click_count'] += 1
             # Redirect to the original URL

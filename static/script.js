@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 e.target.textContent = 'Copied!';
                 // Revert the button text back to 'Copy' after 2 seconds
                 setTimeout(function() {
-                    e.target.textContent = 'Copy';
+                    e.target.innerHTML = '<i class="fa-solid fa-copy" style="padding-right:5px;"></i>Copy';
                 }, 2000);
             });
         });
